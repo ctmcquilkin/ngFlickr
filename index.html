@@ -21,14 +21,13 @@
                 <p>Search Flickr!</p>
               </div>
               <div ng-controller="SearchController">
-                <form ng-submit="searchFlickr(keyword)">
-                  <input type="text" name="keyword" ng-model="keyword" placeholder="Enter a tag to search for" required="" />
+                <form ng-submit="searchFlickr(ksearchKeyword)">
+                  <input type="text" name="keyword" ng-model="searchKeyword" placeholder="Enter a tag to search for" required="" />
                   <input type="submit" value="Submit" id="submit" />
                 </form>
                 <div class="results" ng-if="results">
-                  <h2>We found {{ results.length }} results for {{ keyword }}.</h2>
-                  <div ng-repeat="result in results">
-                    <img ng-src=" {{ trustSrc(flickrURL + result.farmId + '.staticflickr.com/' + result.serverId + '/' + result.id + '_' + result.secret + '.jpg') }}" />
+<!--                   <h2>We found {{ results.length }} results for {{ searchKeyword }}.</h2> -->
+                  <div ng-repeat="photo in photos">
                   </div>
                 </div>
               </div>
