@@ -21,17 +21,18 @@
                 <p>Search Flickr!</p>
               </div>
               <div ng-controller="SearchController">
-                <form ng-submit="searchFlickr(ksearchKeyword)">
-                  <input type="text" name="keyword" ng-model="searchKeyword" placeholder="Enter a tag to search for" required="" />
+                <form ng-submit="searchFlickr(keyWord)">
+                  <input type="text" name="keyWord" ng-model="keyWord" required="" />
                   <input type="submit" value="Submit" id="submit" />
                 </form>
-                <div class="results" ng-if="results">
-<!--                   <h2>We found {{ results.length }} results for {{ searchKeyword }}.</h2> -->
+                <div ng-repeat="photo in photos">
+<!--                 <div class="data" ng-if="photos">
+                  <h2>We found {{ data.length }} results for {{ searchKeyword }}.</h2>
                   <div ng-repeat="photo in photos">
-                  </div>
+                  </div> -->
                 </div>
               </div>
-              <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
+              <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
               <script src="scripts.js"></script>
             </body>
 </html>
