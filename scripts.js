@@ -1,4 +1,4 @@
-var app = angular.module("ng-Flickr", []).constant("FLICKR_API_KEY", "f051d8fed177bb7c8ac6bc9435be0927");
+var app = angular.module("ng-Flickr", []).constant("FLICKR_API_KEY", "*redacted*");
 
 app.config(function ($httpProvider) {
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
