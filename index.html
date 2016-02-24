@@ -20,16 +20,19 @@
                 <h1>ng-Flickr</h1>
                 <p>Search Flickr!</p>
               </div>
-              <div ng-controller="SearchController">
-                <form ng-submit="searchFlickr(keyWord)">
-                  <input type="text" name="keyWord" ng-model="keyWord" required="" />
-                  <input type="submit" value="Submit" id="submit" />
-                </form>
-                <div ng-repeat="photo in photos">
-<!--                 <div class="data" ng-if="photos">
-                  <h2>We found {{ data.length }} results for {{ searchKeyword }}.</h2>
+              <div ng-app="ng-Flickr">
+                <div ng-controller="SearchController">
+                  <form ng-submit="searchFlickr(keyWord)">
+                    <input type="text" name="keyWord" ng-model="keyWord" required="" />
+                    <input type="submit" value="Submit" id="submit" />
+                  </form>
+                  <div class="data" ng-if="photos">
+                    <h2>We found {{ photos.length }} results for {{ keyWord }}.</h2>
+                  </div>
                   <div ng-repeat="photo in photos">
-                  </div> -->
+                    <img ng-src="{{photo.thumbUrl}}" />
+                    <p>{{photo.title}}</p>
+                  </div>
                 </div>
               </div>
               <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>

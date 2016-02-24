@@ -1,45 +1,46 @@
-var app = angular.module("ng-Flickr", []).constant("FLICKR_API_KEY", "*redacted*");
+var app = angular.module("ng-Flickr", []);
 
 app.config(function ($httpProvider) {
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
 });
 
-app.controller('SearchController', function ($scope, photoData) {
+app.controller('SearchController', ['$scope', 'photoData', function ($scope, photoData) {
     // $scope.thumbSize = 'small';
     // $scope.setThumbSize = function (size) { $scope.thumbSize = size; };
-
+        
     $scope.searchFlickr = function getPhotos() {
         $scope.photos = [];
         $scope.items = [];
 
         photoData.getAllItems($scope.keyWord).then(function (data) {
+                //alert(data.message);
             var parsedData = angular.fromJson(data);
             $scope.items = parsedData.photos.photo;
-            alert(data.message);
 
             for (var i = 0; i < $scope.items.length; i++) {
                 var photo = $scope.items[i];
                 $scope.photos.push({ title: photo.title, thumbUrl: ' http://farm' + photo.farm + '.staticflickr.com/' + photo.server + '/' + photo.id + '_' + photo.secret + '_m.jpg' });
             }
+            console.log($scope.photos);
         },
         function (errorMessage) {
             $scope.error = errorMessage;
         });
     };
-});
+}]);
 
-app.factory('photoData', function ($http, $q, FLICKR_API_KEY) {
+app.factory('photoData', ['$http', '$q', function ($http, $q, FLICKR_API_KEY) {
     return {
         getAllItems: function (keyWord) {
             //Creating a deferred object
             var deferred = $q.defer();
-            var apiUrl = 'http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=' + FLICKR_API_KEY + '&tags=' + keyWord + '&format=json&nojsoncallback=1';
+            var apiUrl = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=f051d8fed177bb7c8ac6bc9435be0927&tags=' + keyWord + '&format=json&nojsoncallback=1';
 
             $http.defaults.useXDomain = true;
             // delete $http.defaults.headers.common['X-Requested-With'];
 
             //Calling Web API to fetch pics
-            $http.jsonp(apiUrl).success(function (data) {
+            $http.get(apiUrl).success(function (data) {
                 //Passing data to deferred's resolve function on successful completion
                 deferred.resolve(data);
             }).error(function (error) {
@@ -50,4 +51,4 @@ app.factory('photoData', function ($http, $q, FLICKR_API_KEY) {
             return deferred.promise;
         }
     }
-});
+}]);
