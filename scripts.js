@@ -34,7 +34,7 @@ app.factory('photoData', ['$http', '$q', function ($http, $q, FLICKR_API_KEY) {
         getAllItems: function (keyWord) {
             //Creating a deferred object
             var deferred = $q.defer();
-            var apiUrl = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=f051d8fed177bb7c8ac6bc9435be0927&tags=' + keyWord + '&format=json&nojsoncallback=1';
+            var apiUrl = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=*redacted*&tags=' + keyWord + '&format=json&nojsoncallback=1';
 
             $http.defaults.useXDomain = true;
             // delete $http.defaults.headers.common['X-Requested-With'];
